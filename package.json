@@ -1,0 +1,20 @@
+{
+  "name": "libsql-viewer",
+  "version": "0.0.0",
+  "main": "src/main.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --watch src -e ts --exec 'node src/main.ts'"
+  },
+  "author": "Felix Moses <felix@tacocat.com>",
+  "license": "ISC",
+  "description": "A sqlite-web-like for nodejs & libsql",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@libsql/client": "^0.15.9",
+    "@types/express": "^5.0.3",
+    "nodemon": "^3.1.10"
+  }
+}
