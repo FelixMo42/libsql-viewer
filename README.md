@@ -1,8 +1,16 @@
 # Libsql Viewer
 
-Built using express & htmx.
+`libsql-viewer` is a web-based libsql database browser written in JavaScript.
 
-## How to use
+## Installation
+
+> NOTE: I plan to publish this to npm, but my phone got stolen!
+
+```bash
+npm install --save-dev git+https://github.com/coleifer/sqlite-web.git
+```
+
+## Usage
 
 Via the command line:
 ```bash
@@ -23,3 +31,7 @@ libsqlViewer({
     port: 3000
 })
 ```
+
+## Screenshots
+
+![](screenshots/screenshot.png)
