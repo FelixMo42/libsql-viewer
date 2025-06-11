@@ -8,7 +8,21 @@ export async function getTables(client: Client): Promise<Array<{ name: string }>
 }
 
 export async function getTableData(client: Client, table: string) {
-    return await client.execute(`
+    const data = await client.execute(`
         SELECT * FROM ${table} LIMIT 100
     `)
+
+    const rows = data.rows.map(row => {
+        const array = [] as any[]
+        for (const c of data.columns) {
+            array.push(row[c])
+        }
+        return array
+    })
+
+    return {
+        columns: data.columns,
+        columnTypes: data.columnTypes,
+        rows
+    }
 }

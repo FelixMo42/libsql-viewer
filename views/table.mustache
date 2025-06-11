@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Libsql Viewer</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="/htmx.js"></script>
+</head>
+
+<body>
+    <section class="libsql-viewer-tables">
+        <ul>
+            {{#tables}}
+                <li><a href="/t/{{name}}">{{name}}</a></li>
+            {{/tables}}
+        </ul>
+    </section>
+    <section class="libsql-viewer-table">
+        <table>
+            <tr>
+                {{#table.columns}}
+                    <th>{{.}}</th>
+                {{/table.columns}}
+            </tr>
+            {{#table.rows}}
+                <tr>
+                    {{#.}}
+                        <td>{{.}}</td>
+                    {{/.}}
+                </tr>
+            {{/table.rows}}
+        </table>
+    </section>
+    <script>
+        // Get all a tags and mark them as active if they are the current page
+        htmx.onLoad(() => {
+            const links = document.querySelectorAll('.libsql-viewer-tables a')
+            links.forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add('active')
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

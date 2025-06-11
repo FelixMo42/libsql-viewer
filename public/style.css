@@ -1,6 +1,8 @@
 :root {
     font-family: Arial, Helvetica, sans-serif;
     font-size: large;
+
+    --hover-color: rgba(173, 216, 230, 0.25)
 }
 
 * {
@@ -10,46 +12,85 @@
 body {
     display: flex;
     flex-direction: row;
+    margin: 0px;
 }
 
 /* TABLE SELECTOR */
 
-#tables-selector {
+.libsql-viewer-tables {
+    display: flex;
+    flex-direction: column;
     width: 200px;
-    margin: 5px;
+    height: 100vh;
+    background-color: rgb(240, 240, 240);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-#tables-selector input {
-    width: 100%;
-    font-size: inherit;
-    border-radius: 0px;
-    border: 1px solid black;
-}
-
-#tables {
+.libsql-viewer-tables ul {
     margin: 0px;
     padding: 0px;
 }
 
-#tables li {
+.libsql-viewer-tables li {
     list-style-type: none;
 }
 
-#tables li a {
-    display: block;
-    padding: 5px;
+.libsql-viewer-tables li a {
+    color: black;
+    display: flex;
+    padding: 5px 15px;
+    text-decoration: none;
+    align-items: center;
 }
 
-#tables li a:hover {
-    background-color: gray;
+.libsql-viewer-tables li a:hover {
+    background-color: var(--hover-color);
+}
+
+.libsql-viewer-tables li a.active {
+    background-color: rgba(173, 216, 230, 0.5);
 }
 
 /* MAIN TABLE */
 
-#table {
+.libsql-viewer-table {
+    overflow: scroll;
+    display: flex;
+    height: 100vh;
     flex: 1;
 }
 
-#table th {
+.libsql-viewer-table table {
+    height: 100%;
+    border-collapse: collapse;
+    flex: 1;
+}
+
+.libsql-viewer-table tr {
+    height: 40px;
+}
+
+.libsql-viewer-table th {
     text-align: left;
+}
+
+.libsql-viewer-table td,
+.libsql-viewer-table th {
+    padding: 0px 5px;
+}
+
+.libsql-viewer-table td:first-child,
+.libsql-viewer-table th:first-child {
+    padding-left: 10px;
+}
+
+.libsql-viewer-table td {
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
+.libsql-viewer-table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.1);
 }

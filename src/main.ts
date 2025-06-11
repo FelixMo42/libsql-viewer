@@ -1,58 +1,53 @@
-import express from "express"
 import { assert } from "console"
+import path from 'path'
+import express from "express"
+import mustacheExpress from "mustache-express"
 import { type Client } from "@libsql/client"
 import { getTableData, getTables } from "./utils.ts"
-import { page } from "./templates.ts"
+import { fileURLToPath } from "url"
 
-interface libsqlViewerOptions {
+interface LibsqlViewerOptions {
     client: Client,
     port?: number,
 }
 
-export function libsqlViewer(options: libsqlViewerOptions) {
+export function libsqlViewer(options: LibsqlViewerOptions) {
     assert(options.client, "libsqlViewer must have a client")
 
     // 
     const app = express()
-    app.use(express.static('public'))
-    app.set('view engine', 'html')
+    app.use(express.static(path.join(__dirname, 'public')))
+    app.engine('mustache', mustacheExpress())
+    app.set('view engine', 'mustache')
+    app.set('views', `${__dirname}/views`)
 
-    app.get('/', async (req, res) => {
-        res.send(page())
+    app.get('/', async (_req, res) => {
+        res.redirect("/t/sqlite_master")
     })
 
     app.get('/t/:table', async (req, res) => {
-        const table = req.params.table
-        const data = await getTableData(options.client, table)
-        const rows = data.rows.map(row => {
-            const array = [] as any[]
-            for (const c of data.columns) {
-                array.push(row[c])
-            }
-            return array
-        })
-
-        res.send(page(`
-            <table id="table">
-                <tr>${data.columns.map(c => `<th>${c}</th>`).join("")}</tr>
-                ${rows.map(row => `<tr>${
-                    row.map(item => `<td>${item}</td>`).join("")
-                }</tr>`).join("")}
-            </table>
-        `))
-    })
-
-    // 
-    app.get('/api/tables', async (req, res) => {
         const tables = await getTables(options.client)
-        res.send(tables.map(t => `
-            <li><a href="/t/${t.name}">${t.name}</a></li>
-        `.trim()).join(""))
+        const table = await getTableData(options.client, req.params.table)
+        res.render("table", { tables, table })
     })
 
     // 
     const port = options.port || 3000
-    app.listen(port, () =>  {
+    app.listen(port, (err) =>  {
+        if (err && err.message.includes('EADDRINUSE')) {
+            console.error(`LibsqlViewer: Port ${port} is already in use. Please choose a different port.`)
+            return
+        }
+    
+        if (err) {
+            console.error("Error starting libsql viewer:", err)
+            return
+        }
+
         console.log(`libsql viewer running at http://localhost:${port}`)
     })
 }
+
+// Get the current directory so that we can resolve templates & static files
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.resolve(__filename, '../..')
