@@ -4,10 +4,8 @@
 
 ## Installation
 
-> NOTE: I plan to publish this to npm, but my phone got stolen!
-
 ```bash
-npm install --save-dev git+https://github.com/coleifer/sqlite-web.git
+npm install --save-dev libsql-viewer
 ```
 
 ## Usage
