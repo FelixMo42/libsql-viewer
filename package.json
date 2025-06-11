@@ -1,23 +1,31 @@
 {
   "name": "libsql-viewer",
-  "version": "0.0.0",
-  "description": "A sqlite-web-like for nodejs & libsql",
-  "main": "src/main.ts",
-  "entry": "src/main.ts",
+  "version": "0.1.0",
+  "description": "A sqlite-web-like-lite for nodejs & libsql",
+  "main": "src/lib.ts",
+  "entry": "dist/lib.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --watch src --watch views -e ts,mustache --exec 'node src/main.ts'"
+    "build": "tsc"
   },
   "author": "Felix Moses <felix@tacocat.com>",
+  "repository": "https://github.com/FelixMo42/libsql-viewer",
+  "homepage": "https://github.com/FelixMo42/libsql-viewer#readme",
+  "bin": "dist/cli.js",
   "license": "ISC",
+  "keywords": [
+    "cli",
+    "npmtool"
+  ],
   "dependencies": {
+    "@libsql/client": "^0.15.9",
+    "commander": "^14.0.0",
     "express": "^5.1.0",
     "mustache-express": "^1.3.2"
   },
   "devDependencies": {
-    "@libsql/client": "^0.15.9",
     "@types/express": "^5.0.3",
     "@types/mustache-express": "^1.2.5",
-    "nodemon": "^3.1.10"
+    "typescript": "^5.8.3"
   }
 }

@@ -3,7 +3,6 @@ import path from 'path'
 import express from "express"
 import mustacheExpress from "mustache-express"
 import { type Client } from "@libsql/client"
-import { getTableData, getTables } from "./utils.ts"
 import { fileURLToPath } from "url"
 
 interface LibsqlViewerOptions {
@@ -46,6 +45,34 @@ export function libsqlViewer(options: LibsqlViewerOptions) {
 
         console.log(`libsql viewer running at http://localhost:${port}`)
     })
+}
+
+async function getTables(client: Client): Promise<Array<{ name: string }>> {
+    const results = await client.execute(`
+        SELECT name FROM sqlite_master WHERE type='table'
+    `)
+
+    return results.rows as unknown as Array<{ name: string }>
+}
+
+async function getTableData(client: Client, table: string) {
+    const data = await client.execute(`
+        SELECT * FROM ${table} LIMIT 100
+    `)
+
+    const rows = data.rows.map(row => {
+        const array = [] as any[]
+        for (const c of data.columns) {
+            array.push(row[c])
+        }
+        return array
+    })
+
+    return {
+        columns: data.columns,
+        columnTypes: data.columnTypes,
+        rows
+    }
 }
 
 // Get the current directory so that we can resolve templates & static files
