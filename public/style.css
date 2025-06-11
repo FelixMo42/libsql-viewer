@@ -55,13 +55,12 @@ body {
 
 .libsql-viewer-table {
     overflow: scroll;
-    display: flex;
     height: 100vh;
     flex: 1;
 }
 
 .libsql-viewer-table table {
-    height: 100%;
+    width: 100%;
     border-collapse: collapse;
     flex: 1;
 }
