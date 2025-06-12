@@ -13,9 +13,9 @@ npm install --save-dev libsql-viewer
 Via the command line:
 ```bash
 libsql-viewer
-    --client-url <url or file>
-    --client-auth-token <token>
-        <the rest of the client params>
+    --url <url or file>
+    --auth-token <token>
+        <the rest of the libsql client args>
     --port <port = 3000>
 ```
 
