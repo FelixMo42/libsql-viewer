@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="/style.css">
-
-    <script src="/htmx.js"></script>
 </head>
 
 <body>
@@ -32,7 +30,7 @@
     </section>
     <script>
         // Get all a tags and mark them as active if they are the current page
-        htmx.onLoad(() => {
+        window.addEventListener("load", () => {
             const links = document.querySelectorAll('.libsql-viewer-tables a')
             links.forEach(link => {
                 if (link.href === window.location.href) {
