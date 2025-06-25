@@ -1,6 +1,6 @@
 # Libsql Viewer
 
-`libsql-viewer` is a web-based libsql database browser written in JavaScript.
+`libsql-viewer` is a web-based libsql database browser written in JavaScript. It is desinged to be embeded in a npm project as an easy to use light weight cross platform tool in development.
 
 ## Installation
 
@@ -12,11 +12,12 @@ npm install --save-dev libsql-viewer
 
 Via the command line:
 ```bash
-libsql-viewer
-    --url <url or file>
+libsql-viewer <url or file>
     --auth-token <token>
         <the rest of the libsql client args>
     --port <port = 3000>
+
+libsql-viewer ./my-db.db
 ```
 
 Via code:
