@@ -8,7 +8,7 @@ import { pathToFileURL } from 'url'
 program
     .name("libsql-viewer")
     .description("A simple web viewer for libSQL databases")
-    .version("0.1.0")
+    .version("0.2.0")
     .argument("[database]", "Url for the libSQL database. It can also be set using --client-url.")
     .option("-p, --port <number>", "Port to run the viewer on", "3000")
     .option("--url <value>")

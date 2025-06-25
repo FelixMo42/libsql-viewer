@@ -1,6 +1,6 @@
 {
   "name": "libsql-viewer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A sqlite-web-like-lite for nodejs & libsql",
   "main": "src/lib.ts",
   "entry": "dist/lib.js",
@@ -15,7 +15,8 @@
   "license": "ISC",
   "keywords": [
     "cli",
-    "npmtool"
+    "npmtool",
+    "libsql"
   ],
   "dependencies": {
     "@libsql/client": "^0.15.9",
