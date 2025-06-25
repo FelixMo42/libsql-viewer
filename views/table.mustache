@@ -21,20 +21,14 @@
         </ul>
     </section>
     <section class="libsql-viewer-table">
-        <table>
-            <tr>
-                {{#table.columns}}
-                    <th>{{.}}</th>
-                {{/table.columns}}
-            </tr>
-            {{#table.rows}}
-                <tr>
-                    {{#.}}
-                        <td>{{.}}</td>
-                    {{/.}}
-                </tr>
-            {{/table.rows}}
-        </table>
+        {{#table}}
+            <div class="column">
+                <div class="header cell">{{name}}</div>
+                {{#data}}
+                    <div class="cell">{{.}}</div>
+                {{/data}}
+            </div>
+        {{/table}}
     </section>
     <script>
         // Get all a tags and mark them as active if they are the current page

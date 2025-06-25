@@ -57,39 +57,33 @@ body {
     overflow: scroll;
     height: 100vh;
     flex: 1;
+    display: flex;
 }
 
-.libsql-viewer-table table {
-    width: 100%;
-    border-collapse: collapse;
-    flex: 1;
+.libsql-viewer-table .column {
+    flex: 1 1;
+    width: max-content;
+    min-width: 20px;
+    max-width: max-content;
 }
 
-.libsql-viewer-table tr {
+.libsql-viewer-table .header {
+    font-weight: bold;
+}
+
+.libsql-viewer-table .cell {
     height: 40px;
-}
+    min-height: 40px;
+    max-height: 40px;
+    line-height: 30px;
 
-.libsql-viewer-table th {
-    text-align: left;
-}
+    padding: 5px;
 
-.libsql-viewer-table td,
-.libsql-viewer-table th {
-    padding: 0px 5px;
-}
-
-.libsql-viewer-table td:first-child,
-.libsql-viewer-table th:first-child {
-    padding-left: 10px;
-}
-
-.libsql-viewer-table td {
     overflow: hidden;
-    text-wrap: nowrap;
     text-overflow: ellipsis;
-    max-width: 100px;
+    text-wrap: nowrap;
 }
 
-.libsql-viewer-table tr:nth-child(even) {
+.libsql-viewer-table .cell:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.1);
 }

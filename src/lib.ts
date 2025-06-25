@@ -26,7 +26,7 @@ export function libsqlViewer(options: LibsqlViewerOptions) {
 
     app.get('/t/:table', async (req, res) => {
         const tables = await getTables(options.client)
-        const table = await getTableData(options.client, req.params.table)
+        const table = await getTableColumns(options.client, req.params.table)
         res.render("table", { tables, table })
     })
 
@@ -55,24 +55,16 @@ async function getTables(client: Client): Promise<Array<{ name: string }>> {
     return results.rows as unknown as Array<{ name: string }>
 }
 
-async function getTableData(client: Client, table: string) {
+async function getTableColumns(client: Client, table: string) {
     const data = await client.execute(`
-        SELECT * FROM ${table}
+        SELECT *
+        FROM ${table}
     `)
 
-    const rows = data.rows.map(row => {
-        const array = [] as any[]
-        for (const c of data.columns) {
-            array.push(row[c])
-        }
-        return array
-    })
-
-    return {
-        columns: data.columns,
-        columnTypes: data.columnTypes,
-        rows
-    }
+    return data.columns.map(name => ({
+        name,
+        data: data.rows.map(item => item[name])
+    }))
 }
 
 // Get the current directory so that we can resolve templates & static files
