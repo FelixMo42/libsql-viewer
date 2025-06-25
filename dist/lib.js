@@ -41,7 +41,7 @@ async function getTables(client) {
 }
 async function getTableData(client, table) {
     const data = await client.execute(`
-        SELECT * FROM ${table} LIMIT 100
+        SELECT * FROM ${table}
     `);
     const rows = data.rows.map(row => {
         const array = [];

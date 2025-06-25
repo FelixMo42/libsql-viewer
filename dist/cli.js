@@ -37,7 +37,6 @@ function main() {
     // If so, convert it to a file URL
     if (!isUrl(clientConfig.url)) {
         clientConfig.url = pathToFileURL(clientConfig.url).toString();
-        console.log(clientConfig.url);
     }
     // Run the viewer!
     libsqlViewer({
