@@ -8,16 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="/style.css">
+    <script src="/index.js"></script>
 </head>
 
 <body>
     <section class="libsql-viewer-tables">
         <ul>
             {{#tables}}
-                <li><a href="/t/{{name}}">{{name}}</a></li>
+                <li><a href="/t/{{name}}" data-actions='[
+                    { "name": "download table as csv", "href": "./{{name}}/csv" },
+                    { "name": "download table as json", "href": "./{{name}}/json" }
+                ]'>{{name}}</a></li>
             {{/tables}}
         </ul>
     </section>
+
     <section class="libsql-viewer-table">
         {{#table}}
             <div class="column">
@@ -28,17 +33,9 @@
             </div>
         {{/table}}
     </section>
-    <script>
-        // Get all a tags and mark them as active if they are the current page
-        window.addEventListener("load", () => {
-            const links = document.querySelectorAll('.libsql-viewer-tables a')
-            links.forEach(link => {
-                if (link.href === window.location.href) {
-                    link.classList.add('active')
-                }
-            })
-        })
-    </script>
+
+    <section class="libsql-viewer-context-menu hidden">
+    </section>
 </body>
 
 </html>

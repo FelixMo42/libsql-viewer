@@ -1,8 +1,9 @@
 import { assert } from "console";
-import path from 'path';
+import path from "path";
+import { fileURLToPath } from "url";
 import express from "express";
 import mustacheExpress from "mustache-express";
-import { fileURLToPath } from "url";
+import { json2csv } from 'json-2-csv';
 export function libsqlViewer(options) {
     assert(options.client, "libsqlViewer must have a client");
     // 
@@ -18,6 +19,22 @@ export function libsqlViewer(options) {
         const tables = await getTables(options.client);
         const table = await getTableColumns(options.client, req.params.table);
         res.render("table", { tables, table });
+    });
+    app.get('/t/:table/csv', async (req, res) => {
+        const data = await options.client.execute(`
+            SELECT * FROM ${req.params.table}
+        `);
+        res.header('Content-Type', 'text/csv');
+        res.attachment(`${req.params.table}.csv`);
+        res.send(json2csv(data.rows));
+    });
+    app.get('/t/:table/json', async (req, res) => {
+        const data = await options.client.execute(`
+            SELECT * FROM ${req.params.table}
+        `);
+        res.header('Content-Type', 'application/json');
+        res.attachment(`${req.params.table}.json`);
+        res.send(JSON.stringify(data.rows));
     });
     // 
     const port = options.port || 3000;

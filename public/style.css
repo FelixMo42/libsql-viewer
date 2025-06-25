@@ -87,3 +87,34 @@ body {
 .libsql-viewer-table .cell:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.1);
 }
+
+/* CONTEXT MENU */
+
+.libsql-viewer-context-menu {
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px lightgray;
+    border: 1px solid lightgray;
+}
+
+.libsql-viewer-context-menu.hidden {
+    display: none;
+}
+
+.libsql-viewer-context-menu a {
+    all: unset;
+    cursor: pointer;
+    display: block;
+    padding: 5px 10px;
+}
+
+.libsql-viewer-context-menu a:hover {
+    background-color: var(--hover-color);
+}
+
+.libsql-viewer-context-menu hr {
+    margin: 0px 10px;
+    border: 0.5px solid lightgray;
+}
