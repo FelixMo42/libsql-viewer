@@ -2,6 +2,11 @@
 
 `libsql-viewer` is a web-based libsql database browser written in JavaScript. It is desinged to be embeded in a npm project as an easy to use light weight cross platform tool in development.
 
+## Features
+
+* View tables
+* Export tables as csv or json
+
 ## Installation
 
 ```bash
@@ -34,3 +39,10 @@ libsqlViewer({
 ## Screenshots
 
 ![](screenshots/screenshot.png)
+
+## Roadmap
+
+* Custom queries
+* Drop/clear tables
+* Delete rows
+
