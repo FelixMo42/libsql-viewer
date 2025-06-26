@@ -15,6 +15,12 @@ export function libsqlViewer(options) {
     app.get('/', async (_req, res) => {
         res.redirect("/t/sqlite_master");
     });
+    app.get('/q', async (req, res) => {
+        const tables = await getTables(options.client);
+        const query = req.query.q;
+        const table = query ? await getReadonlyQueryColumns(options.client, query) : [];
+        res.render("query", { tables, table, query });
+    });
     app.get('/t/:table', async (req, res) => {
         const tables = await getTables(options.client);
         const table = await getTableColumns(options.client, req.params.table);
@@ -55,6 +61,13 @@ async function getTables(client) {
         SELECT name FROM sqlite_master WHERE type='table'
     `);
     return results.rows;
+}
+async function getReadonlyQueryColumns(client, query) {
+    const data = (await client.batch([query], "read"))[0];
+    return data.columns.map(name => ({
+        name,
+        data: data.rows.map(item => item[name])
+    }));
 }
 async function getTableColumns(client, table) {
     const data = await client.execute(`

@@ -38,3 +38,20 @@ window.addEventListener("click", () => {
     const menu = document.querySelector('.libsql-viewer-context-menu')
     menu.classList.add('hidden')
 })
+
+// Custom query
+window.addEventListener("load", () => {
+    const textarea = document.querySelector('.libsql-viewer-query textarea')
+    console.log(textarea)
+    if (!textarea) return
+    textarea.addEventListener('keydown', e => {
+        console.log(e)
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault()
+            
+            const url = new URL(window.location)
+            url.searchParams.set('q', textarea.value.trim())
+            window.location.href = url.href
+        }
+    })
+})

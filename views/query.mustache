@@ -23,16 +23,23 @@
         </ul>
     </section>
 
-    <section class="libsql-viewer-table">
-        {{#table}}
-            <div class="column">
-                <div class="header cell">{{name}}</div>
-                {{#data}}
-                    <div class="cell">{{.}}</div>
-                {{/data}}
-            </div>
-        {{/table}}
-    </section>
+
+    <div class="libsql-viewer-section-column">
+        <section class="libsql-viewer-query">
+            <textarea>{{query}}</textarea>
+        </section>
+
+        <section class="libsql-viewer-table">
+            {{#table}}
+                <div class="column">
+                    <div class="header cell">{{name}}</div>
+                    {{#data}}
+                        <div class="cell">{{.}}</div>
+                    {{/data}}
+                </div>
+            {{/table}}
+        </section>
+    </div>
 
     <section class="libsql-viewer-context-menu hidden">
     </section>

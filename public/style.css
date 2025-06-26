@@ -2,7 +2,8 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: large;
 
-    --hover-color: rgba(173, 216, 230, 0.25)
+    --hover-color: rgba(173, 216, 230, 0.25);
+    --border-color: rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -23,7 +24,7 @@ body {
     width: 200px;
     height: 100vh;
     background-color: rgb(240, 240, 240);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid var(--border-color);
 }
 
 .libsql-viewer-tables ul {
@@ -117,4 +118,31 @@ body {
 .libsql-viewer-context-menu hr {
     margin: 0px 10px;
     border: 0.5px solid lightgray;
+}
+
+/* QUERY */
+
+.libsql-viewer-query {
+    display: block;
+}
+
+.libsql-viewer-query textarea {
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--border-color);
+    outline: none;
+    resize: vertical;
+    font-size: inherit;
+    font-family: monospace;
+}
+
+/* COL */
+
+.libsql-viewer-section-column {
+    flex: 1 1;
+    min-width: 0px;
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
 }

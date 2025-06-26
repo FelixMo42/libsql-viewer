@@ -26,6 +26,14 @@ export function libsqlViewer(options: LibsqlViewerOptions) {
         res.redirect("/t/sqlite_master")
     })
 
+    app.get('/q', async (req, res) => {
+        const tables = await getTables(options.client)
+        const query = req.query.q as string
+
+        const table = query ? await getReadonlyQueryColumns(options.client, query) : []
+        res.render("query", { tables, table, query })
+    })
+
     app.get('/t/:table', async (req, res) => {
         const tables = await getTables(options.client)
         const table = await getTableColumns(options.client, req.params.table)
@@ -75,6 +83,15 @@ async function getTables(client: Client): Promise<Array<{ name: string }>> {
     `)
 
     return results.rows as unknown as Array<{ name: string }>
+}
+
+async function getReadonlyQueryColumns(client: Client, query: string) {
+    const data = (await client.batch([query], "read"))[0]
+
+    return data.columns.map(name => ({
+        name,
+        data: data.rows.map(item => item[name])
+    }))
 }
 
 async function getTableColumns(client: Client, table: string) {
