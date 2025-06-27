@@ -6,6 +6,7 @@
 
 * View tables
 * Export tables as csv or json
+* Drop/clear tables
 
 ## Installation
 
@@ -43,6 +44,7 @@ libsqlViewer({
 ## Roadmap
 
 * Custom queries
-* Drop/clear tables
+    - [ ] Get readonly query
 * Delete rows
+* Infinit scroll/paging
 

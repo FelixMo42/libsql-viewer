@@ -16,13 +16,15 @@
         <ul>
             {{#tables}}
                 <li><a href="/t/{{name}}" data-actions='[
+                    { "name": "clear table", "href": "./{{name}}/clear", "onclick": "return confirm(`Are you sure you want to delete all entries from {{name}} table?`)" },
+                    { "name": "drop table", "href": "./{{name}}/drop", "onclick": "return confirm(`Are you sure you want to drop {{name}} table?`)" },
+                    "-",
                     { "name": "export table as csv", "href": "./{{name}}/csv" },
                     { "name": "export table as json", "href": "./{{name}}/json" }
                 ]'>{{name}}</a></li>
             {{/tables}}
         </ul>
     </section>
-
 
     <div class="libsql-viewer-section-column">
         <section class="libsql-viewer-query">

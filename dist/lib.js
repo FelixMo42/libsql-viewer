@@ -26,6 +26,14 @@ export function libsqlViewer(options) {
         const table = await getTableColumns(options.client, req.params.table);
         res.render("table", { tables, table });
     });
+    app.get('/t/:table/clear', async (req, res) => {
+        await options.client.execute(`DELETE FROM ${req.params.table}`);
+        res.redirect(`/t/${req.params.table}`);
+    });
+    app.get('/t/:table/drop', async (req, res) => {
+        await options.client.execute(`DROP TABLE ${req.params.table}`);
+        res.redirect(`/t/sqlite_master`);
+    });
     app.get('/t/:table/csv', async (req, res) => {
         const data = await options.client.execute(`
             SELECT * FROM ${req.params.table}
