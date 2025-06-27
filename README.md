@@ -44,7 +44,9 @@ libsqlViewer({
 ## Roadmap
 
 * Custom queries
-    - [ ] Get readonly query
+    - [x] Get readonly query
 * Delete rows
 * Infinit scroll/paging
-
+* Add & remove columns
+* Better tools for seeing large text blocks
+* Copy tools

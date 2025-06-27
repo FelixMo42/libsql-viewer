@@ -16,6 +16,8 @@
         <ul>
             {{#tables}}
                 <li><a href="/t/{{name}}" data-actions='[
+                    { "name": "copy table name", "onclick": "navigator.clipboard.writeText(`{{name}}`)" },
+                    "-",
                     { "name": "clear table", "href": "./{{name}}/clear", "onclick": "return confirm(`Are you sure you want to delete all entries from {{name}} table?`)" },
                     { "name": "drop table", "href": "./{{name}}/drop", "onclick": "return confirm(`Are you sure you want to drop {{name}} table?`)" },
                     "-",

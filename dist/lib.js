@@ -27,7 +27,10 @@ export function libsqlViewer(options) {
         res.render("table", { tables, table });
     });
     app.get('/t/:table/clear', async (req, res) => {
-        await options.client.execute(`DELETE FROM ${req.params.table}`);
+        try {
+            await options.client.execute(`DELETE FROM ${req.params.table}`);
+        }
+        catch { }
         res.redirect(`/t/${req.params.table}`);
     });
     app.get('/t/:table/drop', async (req, res) => {
